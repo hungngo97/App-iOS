@@ -103,6 +103,20 @@ Location2.schema = {
   },
 };
 
+class Person extends Realm.Object {}
+Person.schema = {
+  name: 'Person',
+  primaryKey: 'id',
+  properties: {
+    time: 'int',
+    id: 'string',
+    name: 'string',
+    phone: 'string',
+    notes: 'string',
+    label: 'string',
+  },
+};
+
 class Symptoms extends Realm.Object {}
 Symptoms.schema = {
   name: 'Symptoms',
@@ -132,6 +146,14 @@ Symptoms.schema = {
   },
 };
 
+class InterviewSummary extends Realm.Object {}
+InterviewSummary.schema = {
+  name: 'InterviewSummary',
+  properties: {
+    time: 'int',
+  },
+};
+
 const REALM_PW_KEY = 'REALM_PW_KEY';
 const REALM_KEY_SIZE = 64;
 
@@ -155,8 +177,8 @@ const getKey = async () => {
       //this strings won't show up since they are only used if biometric auth is used (which isn't here)
       let credentials = await Keychain.getGenericPassword({
         authenticationPrompt: {
-          title: 'CommonCircle Assist Backend storage',
-          subtitle: 'CommonCircle Assist uses this password to protect your personal data',
+          title: 'ContactAssist Backend storage',
+          subtitle: 'ContactAssist uses this password to protect your personal data',
           description: 'locally stored location data',
         },
       });
@@ -235,6 +257,8 @@ const schema2 = [
   Area.schema,
   AreaMatches.schema,
   BackgroundTaskLog.schema,
+  InterviewSummary.schema,
+  Person.schema,
 ];
 
 const schemas = [
